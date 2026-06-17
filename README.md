@@ -1,5 +1,4 @@
-# NamazVaktiPro
-Namaz Vakti Pro App
+# Namaz Vakti Pro (Beta)
 
 ## Özellikler
 
