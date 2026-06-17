@@ -1,7 +1,7 @@
 from customtkinter import CTkFrame, CTkLabel, CTkButton
 from src.views.bildirim import Bildirim
 from src.views.widgets import Widgets
-from src.core.config import namazVaktiProConfig
+from src.core.config import namazVaktiProConfig, configDegistir
 import time
 
 class AnaSayfa(CTkFrame,Widgets):
@@ -134,7 +134,7 @@ class AnaSayfa(CTkFrame,Widgets):
             self.vakit_labels[self.namaz.mevcutVakit().get("vakit")].configure(fg_color="transparent")
             self.vakit_labels[self.vakitAdi].configure(fg_color="#29166B")
 
-        if namazVaktiProConfig()["bildirim"] and (self.kalanSure == "2:00:00" or self.kalanSure == "1:00:00" or self.kalanSure == "0:30:00" or self.kalanSure == "0:15:00" or self.kalanSure == "0:00:01"):
+        if self.kalanSure == "2:00:00" or self.kalanSure == "1:00:00" or self.kalanSure == "0:30:00" or self.kalanSure == "0:15:00" or self.kalanSure == "0:00:01":
             sureJson = {#örnek
                 "vakitSaat":"1 Saat",
                 "saat":"13.00",
@@ -142,9 +142,12 @@ class AnaSayfa(CTkFrame,Widgets):
                 "sonrakiVakit":"17.00"
             }
             
-            if self.namaz.mevcutVakit().get("vakit") == "Sabah" and self.kalanSure != "0:00:01":return
-                
+            if not namazVaktiProConfig()["bildirim"] and self.kalanSure == "0:00:01":
+                configDegistir(bildirim=True)
 
+            if self.namaz.mevcutVakit().get("vakit") == "Sabah" and self.kalanSure != "0:00:01":return
+            
+            
             if "2:" in self.kalanSure:
                 sureJson["vakitSaat"] = "2 Saat"
             elif "1:" in self.kalanSure:
