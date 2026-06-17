@@ -15,6 +15,7 @@ from src.utils.time_utils import Zaman
 class App(CTk):
     def __init__(self):
         super().__init__()
+        self.withdraw()
         
         ww = self.winfo_screenwidth() // 5
         wh = self.winfo_screenheight() // 2
@@ -31,8 +32,8 @@ class App(CTk):
         
         self.namaz = NamazVaktiAPI()
         self.zaman = Zaman()
-        
-        self.pencereAc()
+
+        # self.pencereAc()
 
         self.tray_icon = None
         self.protocol("WM_DELETE_WINDOW", self.gizle_tray)
