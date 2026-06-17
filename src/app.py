@@ -58,15 +58,12 @@ class App(CTk):
         self.withdraw()
     
     def pencereAc(self, icon=None, item=None):
-        if hasattr(self, 'anasayfa'):
-            self.anasayfa.grid(row=0, column=0, sticky="nsew")
-        else:
-            self.anasayfa = AnaSayfa(
-                self,
-                self.namaz,
-                self.zaman
-            )
-            self.anasayfa.grid(row=0, column=0, sticky="nsew")
+        self.anasayfa = AnaSayfa(
+            self,
+            self.namaz,
+            self.zaman
+        )
+        self.anasayfa.grid(row=0, column=0, sticky="nsew")
         
         self.deiconify()
         self.lift()
@@ -76,10 +73,6 @@ class App(CTk):
         self.ayarlar = Ayarlar(self)
         self.ayarlar.grid(row=0, column=0, sticky="nsew")
         
-        self.deiconify()
-        self.lift()
-        self.focus()
-    
     def pencereKapat(self):
         if self.tray_icon:
             self.tray_icon.stop()
